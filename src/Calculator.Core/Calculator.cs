@@ -1,11 +1,28 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace CoolCalc.Core
 {
     public class Calculator
     {
+        private readonly Dictionary<string, Func<double, double, double>> _supportedOperands;
+
+        /// <summary>
+        /// Initializes a new instance of Calculator.
+        /// </summary>
+        public 
+        Calculator()
+        {
+            _supportedOperands = new Dictionary<string, Func<double, double, double>> {
+                {"+", (left, right) => left + right},
+                {"-", (left, right) => left - right},
+                {"*", (left, right) => left * right},
+                {"/", (left, right) => left / right}
+            };
+        }
+
         /// <summary>
         /// Calculate the input string.
         /// </summary>
@@ -36,14 +53,12 @@ namespace CoolCalc.Core
                     // Check what operator is next
                     var nextOperator = parts[i + 1];
                     var nextValue = long.Parse(parts[i + 2]);
-
+                    
                     switch (nextOperator)
                     {
                         case "*":
-                            orderedParts.Add(number*nextValue);
-                            break;
                         case "/":
-                            orderedParts.Add(number/nextValue);
+                            orderedParts.Add(this._supportedOperands[nextOperator](number, nextValue));
                             break;
                         case "+":
                         case "-":
@@ -80,10 +95,8 @@ namespace CoolCalc.Core
                     switch (nextOperator)
                     {
                         case "+":
-                            answer = number + nextValue;
-                            break;
                         case "-":
-                            answer = number - nextValue;
+                            answer = this._supportedOperands[nextOperator](number, nextValue);
                             break;
                     }
                 }
