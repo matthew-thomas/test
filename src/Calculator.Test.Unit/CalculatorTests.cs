@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoolCalc.Core.Test.Unit
@@ -66,6 +67,22 @@ namespace CoolCalc.Core.Test.Unit
 
             // Assert
             Assert.AreEqual(10, result);
+        }
+
+        [TestMethod]
+        public void Calc_UserDefinedOperand_ReturnsResult()
+        {
+            // Arrange
+            var customOperands = new Dictionary<string, Func<double, double, double>>();
+            customOperands.Add("%", (d, d1) => d%d1);
+            var calculator = new Calculator(customOperands);
+            var input = "10%2";
+
+            // Act
+            var result = calculator.Calc(input);
+
+            // Assert
+            Assert.AreEqual(0, result);
         }
     }
 }

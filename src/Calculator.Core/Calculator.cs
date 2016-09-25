@@ -23,6 +23,15 @@ namespace CoolCalc.Core
             };
         }
 
+        public Calculator(
+            Dictionary<string, Func<double, double, double>> calcFunctions) : this()
+        {
+            foreach (var customFunc in calcFunctions)
+            {
+                _supportedOperands.Add(customFunc.Key, customFunc.Value);
+            }
+        }
+
         /// <summary>
         /// Calculate the input string.
         /// </summary>
