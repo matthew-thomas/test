@@ -31,17 +31,41 @@ namespace CoolCalc.Core.Test.Unit
         }
 
         [TestMethod]
+        public
+        void
+        Calc_EmptyString_ThrowsExceptionWithParameterNameInMessage()
+        {
+            // Arrange
+            var calculator        = new Calculator();
+            var input             = string.Empty;
+            var exceptionMessage  = string.Empty;
+
+            // Act
+            try
+            {
+                calculator.Calc(input);
+            }
+            catch (Exception exception)
+            {
+                exceptionMessage = exception.Message;
+            }
+
+            // Assert
+            Assert.IsTrue(exceptionMessage.Contains("input"));
+        }
+
+        [TestMethod]
         public void Calc_AddTwoNumbers_ReturnsResult()
         {
-            //// Arrange
-            //var calculator = new Calculator();
-            //var input      = "5+5";
+            // Arrange
+            var calculator = new Calculator();
+            var input      = "5+5";
 
-            //// Act
-            //var result = calculator.Calc(input);
+            // Act
+            var result = calculator.Calc(input);
 
-            //// Assert
-            //Assert.AreEqual(10, result);
+            // Assert
+            Assert.AreEqual(10, result);
         }
     }
 }

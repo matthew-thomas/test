@@ -14,7 +14,7 @@ namespace CoolCalc.Core
         Calc(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(input));
 
             throw new System.NotImplementedException();
         }
