@@ -7,8 +7,8 @@
     <ProjectGuid>{13C8B5E4-BE23-43E3-930D-21D77906709B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Solution</RootNamespace>
-    <AssemblyName>Solution</AssemblyName>
+    <RootNamespace>CoolCalc</RootNamespace>
+    <AssemblyName>CoolCalc</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

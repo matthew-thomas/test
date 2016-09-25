@@ -6,8 +6,8 @@
     <ProjectGuid>{67800ED9-38F5-4338-85BE-98DCB0C2BF11}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SolutionTests</RootNamespace>
-    <AssemblyName>SolutionTests</AssemblyName>
+    <RootNamespace>CoolCalc.Core.Test.Unit</RootNamespace>
+    <AssemblyName>CoolCalc.Core.Test.Unit</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -52,6 +52,12 @@
   <ItemGroup>
     <Compile Include="CalculatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Calculator.Core\CoolCalc.Core.csproj">
+      <Project>{13C8B5E4-BE23-43E3-930D-21D77906709B}</Project>
+      <Name>CoolCalc.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
