@@ -73,10 +73,9 @@ namespace CoolCalc.Core.Test.Unit
         public void Calc_UserDefinedOperand_ReturnsResult()
         {
             // Arrange
-            var customOperands = new Dictionary<string, Func<double, double, double>>();
-            customOperands.Add("%", (d, d1) => d%d1);
-            var calculator = new Calculator(customOperands);
-            var input = "10%2";
+            var customOperands = new Dictionary<string, Func<double, double, double>> {{"%", (d, d1) => d%d1}};
+            var calculator     = new Calculator(customOperands);
+            var input          = "10%2";
 
             // Act
             var result = calculator.Calc(input);

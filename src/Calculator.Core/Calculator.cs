@@ -10,7 +10,7 @@ namespace CoolCalc.Core
         private readonly Dictionary<string, Func<double, double, double>> _supportedOperands;
 
         /// <summary>
-        /// Initializes a new instance of Calculator.
+        /// Initializes a new instance of Calculator with a default set of functions.
         /// </summary>
         public 
         Calculator()
@@ -23,7 +23,12 @@ namespace CoolCalc.Core
             };
         }
 
-        public Calculator(
+        /// <summary>
+        /// Initializes a new instance of Calculator with supported functions.
+        /// </summary>
+        /// <param name="calcFunctions"></param>
+        public
+        Calculator(
             Dictionary<string, Func<double, double, double>> calcFunctions) : this()
         {
             foreach (var customFunc in calcFunctions)
@@ -45,9 +50,18 @@ namespace CoolCalc.Core
                 throw new ArgumentOutOfRangeException(nameof(input));
 
             // Split expression in to numeral/operator parts.
-            var parts = Regex.Split(input, "([-+*/])");
+            var orderedParts = CalulateHighestPrecendence(input);
+            
+            // Compute all
+            return ComputeAll(orderedParts);
+        }
 
+        private 
+        ArrayList 
+        CalulateHighestPrecendence(string input)
+        {
             var orderedParts = new ArrayList();
+            var parts        = Regex.Split(input, "([-+*/])");
 
             // Compute higher precedence operations on first pass
             for (var i = 0; i < parts.Length - 1; i++)
@@ -62,7 +76,7 @@ namespace CoolCalc.Core
                     // Check what operator is next
                     var nextOperator = parts[i + 1];
                     var nextValue = long.Parse(parts[i + 2]);
-                    
+
                     switch (nextOperator)
                     {
                         case "*":
@@ -86,7 +100,13 @@ namespace CoolCalc.Core
                 }
             }
 
-            // Compute all
+            return orderedParts;
+        }
+
+        private 
+        double 
+        ComputeAll(ArrayList orderedParts)
+        {
             var answer = 0D;
 
             for (var i = 0; i < orderedParts.Count - 1; i++)
@@ -113,7 +133,7 @@ namespace CoolCalc.Core
                 // Skip to next set.
                 i += 2;
             }
-            
+
             return answer;
         }
     }
